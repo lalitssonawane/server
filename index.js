@@ -2,7 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config();
 
 import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/user.js";
@@ -17,6 +18,10 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
